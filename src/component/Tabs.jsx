@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormTab from './FormTab';
+import TableTab from './TableTab';
 
 export const TabNavItem = ({ id, title, activeTab, setActiveTab }) => {
 
@@ -31,7 +32,7 @@ const Tabs = () => {
         <div className="Tabs">
             <ul className="nav">
                 <TabNavItem title="Form" id="tab1" activeTab={activeTab} setActiveTab={setActiveTab} />
-                <TabNavItem title="Table Details" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab} />
+                <TabNavItem title="Table" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab} />
             </ul>
 
             <div className="outlet">
@@ -39,7 +40,7 @@ const Tabs = () => {
                     <FormTab />
                 </TabContent>
                 <TabContent id="tab2" activeTab={activeTab}>
-                    <p>Tab 2 works!</p>
+                    <TableTab />
                 </TabContent>
             </div>
         </div>
