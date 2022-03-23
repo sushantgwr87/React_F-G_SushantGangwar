@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import HelperText from './HelperText';
 
 export const FeedbackOptions = ({ id }) => {
   return (
@@ -23,14 +24,6 @@ export const FeedbackOptions = ({ id }) => {
   );
 }
 
-export const HelperText = () => {
-  return(
-    <p>
-      
-    </p>
-  );
-}
-
 const FormTab = () => {
   return (
     <div className='form_component'>
@@ -46,39 +39,39 @@ const FormTab = () => {
             <div>
               <label htmlFor="name">Customer Name</label>
               <input type="text" name='name' id='name' placeholder="Enter Your Name" />
-              <p>Helper Text</p>
+              <HelperText id={"name"} />
             </div>
             <div>
               <label htmlFor="email">Email</label>
               <input type="email" name='email' id='email' placeholder="Enter Your Mail ID" />
-              <p>Helper Text</p>
+              <HelperText text={"Incorrect Mail Id!"} />
             </div>
             <div>
               <label htmlFor="phone">Phone No.</label>
               <input type="number" name='phone' id='phone' placeholder="Enter Your Phone Number" />
-              <p>Helper Text</p>
+              <HelperText id={"phone"} />
             </div>
           </div>
           <div className='feedback'>
             <div>
               <label htmlFor="feedback_host">Please rate the quality of the service you received from your host.</label>
               <FeedbackOptions id={"feedback_host"} />
-              <p>Helper Text</p>
+              <HelperText text={"Please provide feedback!"} />
             </div>
             <div>
               <label htmlFor="feedback_food">Please rate the quality of your beverage.</label>
               <FeedbackOptions id={"feedback_food"} />
-              <p>Helper Text</p>
+              <HelperText text={"Please provide feedback!"} />
             </div>
             <div>
               <label htmlFor="feedback_clean">Was our restaurant clean?</label>
               <FeedbackOptions id={"feedback_clean"} />
-              <p>Helper Text</p>
+              <HelperText text={"Please provide feedback!"} />
             </div>
             <div>
               <label htmlFor="feedback_final">Please rate your overall dining experience.</label>
               <FeedbackOptions id={"feedback_final"} />
-              <p>Helper Text</p>
+              <HelperText text={"Please provide feedback!"} />
             </div>
           </div>
         </form>
