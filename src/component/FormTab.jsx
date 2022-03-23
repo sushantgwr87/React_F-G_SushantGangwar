@@ -38,17 +38,17 @@ const FormTab = () => {
           <div className="user_details">
             <div>
               <label htmlFor="name">Customer Name</label>
-              <input type="text" name='name' id='name' placeholder="Enter Your Name" />
+              <input required type="text" name='name' id='name' placeholder="Enter Your Name" />
               <HelperText id={"name"} />
             </div>
             <div>
               <label htmlFor="email">Email</label>
-              <input type="email" name='email' id='email' placeholder="Enter Your Mail ID" />
+              <input required type="email" name='email' id='email' placeholder="Enter Your Mail ID" />
               <HelperText text={"Incorrect Mail Id!"} />
             </div>
             <div>
               <label htmlFor="phone">Phone No.</label>
-              <input type="number" name='phone' id='phone' placeholder="Enter Your Phone Number" />
+              <input required type="number" name='phone' id='phone' placeholder="Enter Your Phone Number" />
               <HelperText id={"phone"} />
             </div>
           </div>
