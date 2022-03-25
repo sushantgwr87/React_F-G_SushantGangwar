@@ -4,7 +4,6 @@ import toast from './Toast';
 const TableTab = () => {
 
   const tableData = JSON.parse(localStorage.getItem("formData"));
-  console.log(tableData);
 
   const handleClear = (e) => {
     e.preventDefault();
