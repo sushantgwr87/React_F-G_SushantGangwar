@@ -26,7 +26,8 @@ export const FeedbackOptions = ({ id, onChangeFunction }) => {
 
 const FormTab = () => {
 
-  const formRef = useRef(null)
+  const formRef = useRef(false)
+  const checkRef = useRef(false)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -99,12 +100,12 @@ const FormTab = () => {
   }
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
     setFormData({ ...formData, [e.target.id]: e.target.value })
   }
 
   const handleForm = (e) => {
     e.preventDefault();
+    formValidator();
     if (errorFlag || emptyField) {
       toast({ type: "error", message: emptyField ? `Please Fill the ${errorId}` : `Invalid ${errorId} Input` });
     }
@@ -118,7 +119,10 @@ const FormTab = () => {
   }
 
   useEffect(() => {
-    formValidator();
+    if(checkRef.current!==false)
+      formValidator();
+    else
+      checkRef.current=true
   }, [formData]);
 
   return (
