@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import HelperText from './HelperText';
+import React, { useState, useRef } from 'react';
+import HelperText, { HelperData } from './HelperText';
+import toast from './Toast';
 
 export const FeedbackOptions = ({ id, onChangeFunction }) => {
   return (
     <ul className='radio_inputs'>
       <li>
-        <input type="radio" name={id} value="Excellent" id={id} onChange={onChangeFunction} />
+        <input required type="radio" name={id} value="Excellent" id={id} onChange={onChangeFunction} />
         <label htmlFor="Excellent">Excellent</label>
       </li>
       <li>
-        <input type="radio" value="Good" name={id} id={id} onChange={onChangeFunction} />
+        <input required type="radio" value="Good" name={id} id={id} onChange={onChangeFunction} />
         <label htmlFor="Good">Good</label>
       </li>
       <li>
-        <input type="radio" value="Fair" name={id} id={id} onChange={onChangeFunction} />
+        <input required type="radio" value="Fair" name={id} id={id} onChange={onChangeFunction} />
         <label htmlFor="Fair">Fair</label>
       </li>
       <li>
-        <input type="radio" value="Bad" name={id} id={id} onChange={onChangeFunction} />
+        <input required type="radio" value="Bad" name={id} id={id} onChange={onChangeFunction} />
         <label htmlFor="Bad">Bad</label>
       </li>
     </ul>
@@ -25,6 +26,8 @@ export const FeedbackOptions = ({ id, onChangeFunction }) => {
 }
 
 const FormTab = () => {
+
+  const formRef = useRef(null)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,22 +39,53 @@ const FormTab = () => {
     feedback_final: null,
   })
 
-  // const { email, phone } = formData
+  const { email, phone } = formData
 
-  // const [error, setError] = useState({
-  //   errorId: "",
-  //   errorFlag: false,
-  // })
+  const [error, setError] = useState({
+    errorId: "",
+    errorFlag: false,
+    emptyField: false
+  })
 
-  // const { errorId, errorFlag} = error;
+  const { errorId, errorFlag, emptyField } = error;
 
-  // const formValidator = () => {
-  //   if(Object.keys(formData).length === 0){
-  //     setError();
-  //   }
-  //   else if(email==="" || !(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)))
-  //     setError(true)
-  // }
+  function isObjectEmpty() {
+    for (var key in formData) {
+      if (formData[key] === null || formData[key] === "")
+        return {
+          empty: true,
+          id: key
+        };
+    }
+    return {
+      empty: false
+    };
+  }
+
+  const formValidator = () => {
+    const check = isObjectEmpty();
+    if (check.empty) {
+      setError({
+        errorId: check.id,
+        errorFlag: true,
+        emptyField: true
+      });
+    }
+    else if (!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email))) {
+      setError({
+        errorId: "email",
+        errorFlag: true,
+        emptyField: false
+      })
+    }
+    else if (phone.length !== 10) {
+      setError({
+        errorId: "phone",
+        errorFlag: true,
+        emptyField: false
+      })
+    }
+  }
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -60,9 +94,17 @@ const FormTab = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
+    formValidator();
+    if(errorFlag || emptyField)
+    {
+      toast({ type: "error", message: emptyField ? `Please Fill the ${errorId}` : `Invalid ${errorId} Input` });
+      HelperData(error);
+    }
     const initialFormData = localStorage.getItem("formData") ? JSON.parse(localStorage.getItem("formData")) : [];
     const newValue = [...initialFormData, { ...formData }];
     localStorage.setItem("formData", JSON.stringify(newValue));
+    toast({ type: "success", message: "Data Submitted" });
+    formRef.current.reset();
   }
 
   return (
@@ -74,7 +116,7 @@ const FormTab = () => {
         out this questionnaire. Thank you.
       </h3>
       <div className="form">
-        <form onSubmit={handleForm} method="post">
+        <form onSubmit={handleForm} ref={formRef} method="post">
           <div className="user_details">
             <div>
               <label htmlFor="name">Customer Name<span>{' '}*</span></label>
