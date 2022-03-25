@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import toast from './Toast';
 
 const TableTab = () => {
 
@@ -8,6 +9,7 @@ const TableTab = () => {
   const handleClear = (e) => {
     e.preventDefault();
     localStorage.clear();
+    toast({ type: "info", message: "Table Cleared" });
     window.location.reload(false);
   }
 
@@ -15,6 +17,7 @@ const TableTab = () => {
     <div className='table_component'>
       <h1>All Details</h1>
       <button onClick={handleClear}>Clear</button>
+      <h3>Click on this button to clear the Table</h3>
       <table>
         <thead>
           <tr>
