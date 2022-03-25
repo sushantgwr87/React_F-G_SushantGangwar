@@ -113,7 +113,7 @@ const FormTab = () => {
       const initialFormData = localStorage.getItem("formData") ? JSON.parse(localStorage.getItem("formData")) : [];
       const newValue = [...initialFormData, { ...formData }];
       localStorage.setItem("formData", JSON.stringify(newValue));
-      toast({ type: "success", message: "Data Submitted" });
+      toast({ type: "success", message: "Thank you for completing the information" });
       formRef.current.reset();
     }
   }
