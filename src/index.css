@@ -144,14 +144,79 @@ input[name="phone"] {
   cursor: pointer;
 }
 
-.form {
+.form, table {
   background-color: #fcf9f9;
+  box-shadow: 0px 1px 5px 1px rgb(196, 196, 196);
   border-radius: 5px;
   padding: 30px;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0477c4;
+  color: white;
+}
+
 .form span {
   color: red;
+}
+
+.form button {
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #0dc916;
+  color: #fafafa;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.table_component button {
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ec2b11;
+  color: #fafafa;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.table_component h1 {
+  margin-bottom: 20px;
+}
+
+.table_component button:hover {
+  box-shadow: 0px 0px 50px 1px inset #d8270f;
+}
+.form button:hover {
+  box-shadow: 0px 0px 50px 1px inset #02f70e80;
+}
+
+.feedback {
+  padding: 10px 0;
 }
 
 .feedback>div {
