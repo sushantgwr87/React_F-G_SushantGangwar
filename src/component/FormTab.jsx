@@ -36,22 +36,22 @@ const FormTab = () => {
     feedback_final: null,
   })
 
-  const { email, phone } = formData
+  // const { email, phone } = formData
 
-  const [error, setError] = useState({
-    errorId: "",
-    errorFlag: false,
-  })
+  // const [error, setError] = useState({
+  //   errorId: "",
+  //   errorFlag: false,
+  // })
 
-  const { errorId, errorFlag} = error;
+  // const { errorId, errorFlag} = error;
 
-  const formValidator = () => {
-    if(Object.keys(formData).length === 0){
-      setError();
-    }
-    else if(email==="" || !(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)))
-      setError(true)
-  }
+  // const formValidator = () => {
+  //   if(Object.keys(formData).length === 0){
+  //     setError();
+  //   }
+  //   else if(email==="" || !(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)))
+  //     setError(true)
+  // }
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -60,7 +60,9 @@ const FormTab = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    console.log(formData)
+    const initialFormData = localStorage.getItem("formData") ? JSON.parse(localStorage.getItem("formData")) : [];
+    const newValue = [...initialFormData, { ...formData }];
+    localStorage.setItem("formData", JSON.stringify(newValue));
   }
 
   return (
